@@ -9,8 +9,15 @@ export function updateDateTime() {
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
 
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
   if (el.currentDate) {
     el.currentDate.textContent = `${dayName}, ${day} tháng ${month}, ${year}`;
+  }
+  if (el.currentTime) {
+    el.currentTime.textContent = `${hours}:${minutes}:${seconds}`;
   }
 }
 

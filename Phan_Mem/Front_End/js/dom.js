@@ -15,6 +15,7 @@ export function initDomSelectors() {
 
   // Header & Cards
   el.currentDate = $('currentDateDisplay');
+  el.currentTime = $('currentTimeDisplay');
   el.onlineCount = $('headerOnlineCount');
   el.valOnline = $('val-online');
   el.valTemp = $('val-temp');

@@ -69,6 +69,6 @@ export function updateDeviceOnlineCount() {
 
   if (el.valOnline) el.valOnline.textContent = online;
   const valTotal = document.getElementById('val-total');
-  if (valTotal) valTotal.textContent = `/${total}`;
+  if (valTotal) valTotal.textContent = `/ ${total}`;
   if (el.onlineCount) el.onlineCount.textContent = `${online}/${total} thiết bị online`;
 }

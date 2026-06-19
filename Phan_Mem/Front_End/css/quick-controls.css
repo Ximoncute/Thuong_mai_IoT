@@ -42,6 +42,7 @@
   border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.9rem;
+  font-family: inherit;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -68,13 +69,15 @@
 }
 
 .btn-control.refresh-btn {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: var(--brand-green-bg);
+  color: var(--brand-green);
+  font-weight: 600;
+  font-size: 0.95rem;
   margin-left: auto;
 }
 
 .btn-control.refresh-btn:hover {
-  background-color: #a7f3d0;
+  background-color: var(--brand-green-hover);
 }
 
 .btn-control.refresh-btn i.spin {

@@ -11,7 +11,7 @@ export const dashboardMetricsTemplate = `
       </div>
       <div class="metric-value-container">
         <span class="metric-value" id="val-online">2</span>
-        <span class="metric-unit" id="val-total">/2</span>
+        <span class="metric-unit" id="val-total">/ 2</span>
       </div>
       <span class="metric-footer">Kết nối ổn định</span>
     </div>

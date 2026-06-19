@@ -19,8 +19,8 @@
 }
 
 .device-card.active .device-icon-wrapper {
-  background-color: var(--brand-green-bg);
-  color: var(--brand-green);
+  background-color: var(--orange-accent-bg);
+  color: var(--orange-accent);
 }
 
 .device-details {

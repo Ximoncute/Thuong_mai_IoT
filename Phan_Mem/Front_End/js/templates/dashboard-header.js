@@ -11,6 +11,7 @@ export const dashboardHeaderTemplate = `
         <div class="status-dot pulse"></div>
         <span id="headerOnlineCount">2/2 thiết bị online</span>
       </div>
+      <div class="header-time" id="currentTimeDisplay">--:--:--</div>
       <div class="header-date" id="currentDateDisplay">Thứ Năm, 18 tháng 6, 2026</div>
     </div>
   </header>

@@ -31,14 +31,36 @@
 
 /* Đảm bảo trị số hiển thị đồng bộ phông chữ, đồng bộ màu chữ */
 .metric-value-container {
-  display: flex; align-items: baseline;
-  font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
 }
 
-.metric-value { font-size: 2.2rem; font-weight: 700; line-height: 1; font-family: inherit; color: inherit; }
-.metric-unit { font-size: 1.15rem; font-weight: 600; margin-left: 2px; font-family: inherit; color: inherit; }
+.metric-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: inherit;
+  color: inherit;
+}
 
-#val-total { font-size: 2.2rem; font-weight: 700; font-family: inherit; color: inherit; }
+.metric-unit {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  color: inherit;
+}
+
+#val-total {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: inherit;
+  color: inherit;
+}
 .metric-footer { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
 
 @media (max-width: 1024px) {

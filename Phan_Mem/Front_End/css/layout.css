@@ -49,8 +49,19 @@
   background-color: var(--brand-green-accent);
 }
 
+.header-time {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  background-color: var(--border-color-light);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
 .header-date {
-  color: var(--text-muted);
+  color: var(--text-main);
   font-size: 0.9rem;
   font-weight: 500;
 }
