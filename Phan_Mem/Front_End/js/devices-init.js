@@ -49,11 +49,21 @@ export function initDeviceControls() {
     });
   });
 
-  const quickStateBtns = [el.btnQuickAllOn, el.btnQuickAllOff, el.btnQuickAway, el.btnQuickNight];
+  const quickStateBtns = [el.btnQuickStandby, el.btnQuickAllOn, el.btnQuickAllOff, el.btnQuickAway, el.btnQuickNight];
   const setActiveQuickControl = (activeBtn) => {
     quickStateBtns.forEach(btn => btn && btn.classList.remove('active-all'));
     activeBtn && activeBtn.classList.add('active-all');
   };
+
+  let standbyTimeout = null;
+
+  if (el.btnQuickStandby) {
+    el.btnQuickStandby.addEventListener('click', () => {
+      clearTimeout(standbyTimeout);
+      setActiveQuickControl(el.btnQuickStandby);
+      logSerial(`[Hệ thống] Trở về Chế độ chờ (Tự động).`);
+    });
+  }
 
   const quickActions = [
     { btn: el.btnQuickAllOn, active: [true, null], msg: 'Đã thực hiện lệnh: Bật tất cả đèn.' },
@@ -66,6 +76,13 @@ export function initDeviceControls() {
     if (btn) {
       btn.addEventListener('click', () => {
         setActiveQuickControl(btn);
+        
+        // Hẹn giờ tự động chuyển về Chế độ chờ sau 10 giây nếu không có tương tác nào khác
+        clearTimeout(standbyTimeout);
+        standbyTimeout = setTimeout(() => {
+          if (el.btnQuickStandby) el.btnQuickStandby.click();
+        }, 10000); // 10 giây
+
         if (active[0] !== null && el.toggleLightLiving) {
           el.toggleLightLiving.checked = active[0];
           el.toggleLightLiving.dispatchEvent(new Event('change'));

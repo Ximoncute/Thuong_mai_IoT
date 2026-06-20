@@ -1,10 +1,21 @@
 // js/charts-state.js
-export const chartLabels = ['00:00', '04:00', '08:00', '12:00', '16:00'];
-export const baseTempData = [20.5, 18.2, 23.4, 32.1, 28.5];
-export const baseHumidData = [55, 75, 68, 45, 72];
-export const baseLightData = [0, 0, 150, 450, 410];
+const generateInitialLabels = () => {
+  const labels = [];
+  const now = Date.now();
+  for (let i = 7; i >= 0; i--) {
+    const time = new Date(now - i * 5000); // 5 seconds interval
+    labels.push(time.toTimeString().split(' ')[0]);
+  }
+  return labels;
+};
+
+export const chartLabels = generateInitialLabels();
+export const baseTempData = [25.0, 25.1, 24.9, 25.0, 25.2, 25.1, 25.0, 25.0];
+export const baseHumidData = [60, 61, 60, 59, 60, 62, 60, 60];
+export const baseLightData = [300, 305, 300, 295, 300, 310, 300, 300];
 
 export const tempChart = { val: null };
 export const humidChart = { val: null };
 export const lightChart = { val: null };
 export const useFallbackCharts = { val: false };
+

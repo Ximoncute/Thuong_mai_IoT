@@ -6,7 +6,11 @@ export const dashboardControlsTemplate = `
       <span class="controls-title">Điều khiển nhanh</span>
     </div>
     <div class="controls-btn-row">
-      <button class="btn-control active-all" id="btnQuickAllOn">
+      <button class="btn-control active-all" id="btnQuickStandby">
+        <i class="fa-solid fa-hourglass-half"></i>
+        Chế độ chờ
+      </button>
+      <button class="btn-control" id="btnQuickAllOn">
         <i class="fa-solid fa-sun"></i>
         Bật tất cả đèn
       </button>

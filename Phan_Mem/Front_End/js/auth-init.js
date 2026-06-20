@@ -98,9 +98,18 @@ export function initAuthentication() {
         state.connection.activeIp = null; localStorage.removeItem('activeIp');
         state.auth.currentUser = null; localStorage.removeItem('currentUser');
         if (state.serial.connected && el.btnSerialConnect) el.btnSerialConnect.click();
-        if (el.authOverlay) el.authOverlay.style.display = 'flex';
-        if (el.appContainer) el.appContainer.style.display = 'none';
-        checkWorkspaceLock();
+        
+        // Ngắt kết nối MQTT client nếu có
+        if (state.connection.mqttClient) {
+          try {
+            state.connection.mqttClient.end();
+          } catch(e) {}
+          state.connection.mqttClient = null;
+          state.connection.mqttConnected = false;
+        }
+
+        // Chuyển hướng về giao diện Landing Page
+        window.location.href = 'ladingpage.html';
       }
     });
   }

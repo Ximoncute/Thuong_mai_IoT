@@ -45,6 +45,10 @@ export const settingsTemplate = `
     </div>
 
     <div class="settings-group">
+      <button class="btn-control refresh-btn" id="btnSaveThresholds" style="margin-left: 0; padding: 10px 20px; font-weight: 600; width: auto;">Lưu ngưỡng cảnh báo</button>
+    </div>
+
+    <div class="settings-group">
       <span class="settings-label">Chế độ hiển thị Camera</span>
       <span class="settings-description">Lựa chọn chất lượng hiển thị và nguồn truyền trực tiếp của camera.</span>
       <div class="settings-input-group">

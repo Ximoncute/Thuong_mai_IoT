@@ -2,7 +2,7 @@
 import { state } from './state.js';
 import { el } from './dom.js';
 import { logSerial } from './utils.js';
-import { baseTempData, baseHumidData, baseLightData, tempChart, humidChart, lightChart, useFallbackCharts } from './charts-state.js';
+import { chartLabels, baseTempData, baseHumidData, baseLightData, tempChart, humidChart, lightChart, useFallbackCharts } from './charts-state.js';
 import { drawFallbackCharts } from './charts-fallback.js';
 
 export function startSensorFluctuations() {
@@ -34,23 +34,34 @@ export function updateMetricDisplays() {
   if (el.chartValHumid) el.chartValHumid.textContent = `${state.sensors.humid} %`;
   if (el.chartValLight) el.chartValLight.textContent = `${state.sensors.light} lux`;
 
-  baseTempData[baseTempData.length - 1] = parseFloat(state.sensors.temp.toFixed(1));
-  baseHumidData[baseHumidData.length - 1] = state.sensors.humid;
-  baseLightData[baseLightData.length - 1] = state.sensors.light;
+  const now = new Date();
+  const timeStr = now.toTimeString().split(' ')[0]; // "HH:MM:SS"
+
+  // Đẩy phần tử mới vào cuối mảng dữ liệu thực tế
+  chartLabels.push(timeStr);
+  baseTempData.push(parseFloat(state.sensors.temp.toFixed(1)));
+  baseHumidData.push(state.sensors.humid);
+  baseLightData.push(state.sensors.light);
+
+  // Giới hạn mảng tối đa 8 điểm để đồ thị cuộn tròn đẹp mắt
+  const MAX_POINTS = 8;
+  while (chartLabels.length > MAX_POINTS) {
+    chartLabels.shift();
+    baseTempData.shift();
+    baseHumidData.shift();
+    baseLightData.shift();
+  }
 
   if (useFallbackCharts.val) {
     drawFallbackCharts();
   } else {
     if (tempChart.val) {
-      tempChart.val.data.datasets[0].data[tempChart.val.data.datasets[0].data.length - 1] = parseFloat(state.sensors.temp.toFixed(1));
       tempChart.val.update('none');
     }
     if (humidChart.val) {
-      humidChart.val.data.datasets[0].data[humidChart.val.data.datasets[0].data.length - 1] = state.sensors.humid;
       humidChart.val.update('none');
     }
     if (lightChart.val) {
-      lightChart.val.data.datasets[0].data[lightChart.val.data.datasets[0].data.length - 1] = state.sensors.light;
       lightChart.val.update('none');
     }
   }

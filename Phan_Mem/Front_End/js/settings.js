@@ -39,39 +39,43 @@ export function initSettingsManager() {
     }
   }
 
-  if (el.settingsTempThreshold) {
-    el.settingsTempThreshold.addEventListener('change', (e) => {
-      const val = parseFloat(e.target.value);
-      if (!isNaN(val)) {
-        state.settings.tempThreshold = val;
-        localStorage.setItem('settingsTempThreshold', val);
-        logSerial(`[Cấu hình] Đã cập nhật ngưỡng cảnh báo nhiệt độ: ${val}°C`, false, true);
-        publishThresholds();
-      }
-    });
-  }
+  if (el.btnSaveThresholds) {
+    el.btnSaveThresholds.addEventListener('click', () => {
+      const tempVal = parseFloat(el.settingsTempThreshold.value);
+      const humidVal = parseFloat(el.settingsHumidThreshold.value);
+      const lightVal = parseFloat(el.settingsLightThreshold.value);
 
-  if (el.settingsHumidThreshold) {
-    el.settingsHumidThreshold.addEventListener('change', (e) => {
-      const val = parseFloat(e.target.value);
-      if (!isNaN(val)) {
-        state.settings.humidThreshold = val;
-        localStorage.setItem('settingsHumidThreshold', val);
-        logSerial(`[Cấu hình] Đã cập nhật ngưỡng cảnh báo độ ẩm: ${val}%`, false, true);
-        publishThresholds();
+      if (isNaN(tempVal) || isNaN(humidVal) || isNaN(lightVal)) {
+        alert('Vui lòng nhập giá trị hợp lệ cho các ngưỡng cảnh báo!');
+        return;
       }
-    });
-  }
 
-  if (el.settingsLightThreshold) {
-    el.settingsLightThreshold.addEventListener('change', (e) => {
-      const val = parseFloat(e.target.value);
-      if (!isNaN(val)) {
-        state.settings.lightThreshold = val;
-        localStorage.setItem('settingsLightThreshold', val);
-        logSerial(`[Cấu hình] Đã cập nhật ngưỡng cảnh báo ánh sáng: ${val} lux`, false, true);
-        publishThresholds();
-      }
+      state.settings.tempThreshold = tempVal;
+      state.settings.humidThreshold = humidVal;
+      state.settings.lightThreshold = lightVal;
+
+      localStorage.setItem('settingsTempThreshold', tempVal);
+      localStorage.setItem('settingsHumidThreshold', humidVal);
+      localStorage.setItem('settingsLightThreshold', lightVal);
+
+      logSerial(`[Cấu hình] Đã lưu các ngưỡng mới: Nhiệt độ ${tempVal}°C, Độ ẩm ${humidVal}%, Ánh sáng ${lightVal} lux`, false, true);
+      publishThresholds();
+
+      // Phản hồi trực quan trên nút bấm
+      const originalText = el.btnSaveThresholds.textContent;
+      el.btnSaveThresholds.textContent = 'Đã lưu thành công!';
+      el.btnSaveThresholds.style.backgroundColor = '#22c55e'; // Màu xanh lá sáng
+      el.btnSaveThresholds.style.borderColor = '#22c55e';
+      el.btnSaveThresholds.style.color = '#ffffff';
+      el.btnSaveThresholds.disabled = true;
+
+      setTimeout(() => {
+        el.btnSaveThresholds.textContent = originalText;
+        el.btnSaveThresholds.style.backgroundColor = '';
+        el.btnSaveThresholds.style.borderColor = '';
+        el.btnSaveThresholds.style.color = '';
+        el.btnSaveThresholds.disabled = false;
+      }, 2000);
     });
   }
 }

@@ -26,6 +26,7 @@ export function initDomSelectors() {
   el.chartValTemp = $('chart-val-temp');
   el.chartValHumid = $('chart-val-humidity');
   el.chartValLight = $('chart-val-light');
+  el.btnQuickStandby = $('btnQuickStandby');
   el.btnQuickAllOn = $('btnQuickAllOn');
   el.btnQuickAllOff = $('btnQuickAllOff');
   el.btnQuickAway = $('btnQuickAway');
@@ -100,6 +101,7 @@ export function initDomSelectors() {
   el.settingsTempThreshold = $('settingsTempThreshold');
   el.settingsHumidThreshold = $('settingsHumidThreshold');
   el.settingsLightThreshold = $('settingsLightThreshold');
+  el.btnSaveThresholds = $('btnSaveThresholds');
   el.settingsCameraMode = $('settingsCameraMode');
 
   // Profile selectors
