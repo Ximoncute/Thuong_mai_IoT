@@ -105,6 +105,11 @@ export function connectToEspMqtt(ip, onSuccess, onFailure) {
 
   client.on('close', () => {
     state.connection.mqttConnected = false;
+    // Đặt lại dữ liệu về 0 khi ngắt kết nối
+    state.sensors.temp = 0;
+    state.sensors.humid = 0;
+    state.sensors.light = 0;
+    updateMetricDisplays();
   });
 
   client.on('message', (topic, message) => {
@@ -254,6 +259,12 @@ export function initIpConnectionLock() {
           state.connection.mqttClient = null;
           state.connection.mqttConnected = false;
         }
+
+        // Đặt lại dữ liệu về 0 khi ngắt kết nối
+        state.sensors.temp = 0;
+        state.sensors.humid = 0;
+        state.sensors.light = 0;
+        updateMetricDisplays();
 
         if (state.serial.connected && el.btnSerialConnect) el.btnSerialConnect.click();
         checkWorkspaceLock();

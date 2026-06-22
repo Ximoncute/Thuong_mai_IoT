@@ -6,21 +6,7 @@ import { chartLabels, baseTempData, baseHumidData, baseLightData, tempChart, hum
 import { drawFallbackCharts } from './charts-fallback.js';
 
 export function startSensorFluctuations() {
-  setInterval(() => {
-    if (!state.connection.activeIp) return;
-    if (state.connection.mqttConnected) return; // Không tự tạo dữ liệu giả lập khi đã kết nối phần cứng thực tế
-
-    const tempDelta = (Math.random() - 0.5) * 0.2;
-    state.sensors.temp = Math.max(15, Math.min(45, state.sensors.temp + tempDelta));
-
-    const humidDelta = Math.floor(Math.random() * 3) - 1;
-    state.sensors.humid = Math.max(10, Math.min(100, state.sensors.humid + humidDelta));
-
-    const lightDelta = Math.floor(Math.random() * 11) - 5;
-    state.sensors.light = Math.max(0, Math.min(1000, state.sensors.light + lightDelta));
-
-    updateMetricDisplays();
-  }, 3000);
+  // Đã vô hiệu hóa sinh dữ liệu giả lập tự động theo yêu cầu của người dùng để tránh nhảy số khi không có kết nối thực
 }
 
 export function updateMetricDisplays() {

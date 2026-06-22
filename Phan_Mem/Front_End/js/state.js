@@ -1,9 +1,9 @@
 // js/state.js
 export const state = {
   sensors: {
-    temp: 28.5,
-    humid: 72,
-    light: 450
+    temp: 0,
+    humid: 0,
+    light: 0
   },
   connection: {
     connected: true,
